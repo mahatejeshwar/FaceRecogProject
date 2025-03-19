@@ -4,7 +4,7 @@ import cv2
 from sklearn.metrics.pairwise import cosine_similarity
 from keras_facenet import FaceNet
 import os
-
+from google.colab.patches import cv2_imshow
 # Initialize FaceNet for feature extraction
 embedder = FaceNet()
 
@@ -82,8 +82,7 @@ if embedding is not None:
     text = f"{predicted_label} ({similarity * 100:.2f}%)"
     cv2.rectangle(image, (startX, startY), (endX, endY), (0, 255, 0), 2)
     cv2.putText(image, text, (startX, startY - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 255, 0), 2)
-    cv2.imshow('Face Recognition', image)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    cv2_imshow(image)
+
 else:
     print("[INFO] No Face Detected")
